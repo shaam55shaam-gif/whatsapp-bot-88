@@ -1,17 +1,14 @@
 from flask import Flask, jsonify
-import datetime, random
-app=Flask(__name__)
-H="""
-<html dir=rtl><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1">
-<style>
+app = Flask(__name__)
+HTML = """<html dir=rtl><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><style>
 body{background:#000;color:#fff;font-family:Arial;margin:0}
-.h{background:linear-gradient(90deg,#fff,gold,#fff,#0af,#fff);color:#000;padding:11px;text-align:center;font-weight:900;position:sticky;top:0;z-index:20;font-size:10px;border-bottom:3px solid gold}
+.h{background:linear-gradient(90deg,#fff,gold,#fff,#0af,#fff);color:#000;padding:11px;text-align:center;font-weight:900;position:sticky;top:0;z-index:20;font-size:11px;border-bottom:3px solid gold}
 .card{background:#1a1a1a;border-right:5px solid gold;margin:7px;padding:11px;border-radius:14px;border:1px solid #333}
-.card.nat{border-right-color:gold;background:#1a1a00}.card.champ{border-right-color:#0af;background:#001a2a}
+.card.nat{border-right-color:gold}.card.champ{border-right-color:#0af;background:#001a2a}
 .grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:6px;max-height:200px;overflow:auto}
 .box{background:#111;border:1px solid #333;border-radius:10px;padding:5px;text-align:center;font-size:8px}
 .box.ok{border-color:gold;background:#1a1500}.box.ok2{border-color:gold;background:#2a2a00}.box.ok3{border-color:#0af;background:#001a2a}.box.loading{border-color:#fff;background:#222}
-.bar{height:10px;background:#222;border-radius:10px;display:flex;margin:5px 0;overflow:hidden}.bar div{height:100%}
+.bar{height:10px;background:#222;border-radius:10px;display:flex;margin:5px 0}.bar div{height:100%}
 .f{padding:6px 11px;border-radius:20px;border:1px solid #444;background:#111;color:#fff;margin:3px;display:inline-block;cursor:pointer;font-size:10px}.f.active{background:gold;color:#000;font-weight:900}
 .search{margin:8px;background:#111;border:2px solid gold;border-radius:25px;padding:10px 14px;display:flex}.search input{flex:1;background:transparent;border:none;color:#fff;outline:none}
 .prog{height:8px;background:#222;border-radius:8px;margin:8px;overflow:hidden}.prog div{height:100%;background:linear-gradient(90deg,gold,#fff,gold,#0af);transition:width.5s}
@@ -20,15 +17,15 @@ body{background:#000;color:#fff;font-family:Arial;margin:0}
 .btn-yt{background:red;color:#fff}.btn-ai{background:gold;color:#000}
 .count{font-size:10px;color:#0f0;background:#002a00;padding:3px 7px;border-radius:10px;border:1px solid #0f0;display:inline-block;margin:3px}
 </style></head><body>
-<div class=h>DIAMOND V58.1 - 200 دولة + 12 منتخب + 10 ابطال = 222 بطولة - الماسي LIGHT</div>
+<div class=h>💎 DIAMOND V58.2 - 200 دولة + 12 منتخب + 10 ابطال = 222 بطولة - LIGHT FIX</div>
 <div style="padding:6px;font-size:11px;color:gold;display:flex;justify-content:space-between"><span id=cnt>0/222</span><span id=upd>الماسي يبدأ...</span></div>
 <div class=prog><div id=progBar style="width:0%"></div></div>
 <div class=search><input id=q placeholder="ابحث: سوريا، فلسطين، الهلال، Real Madrid..." oninput=doFilter()></div>
-<div style="padding:7px;white-space:nowrap;overflow:auto;text-align:center"><span class="f active" onclick="setF('all',this)">الكل 222</span><span class=f onclick="setF('champ',this)">ابطال</span><span class=f onclick="setF('منتخبات',this)">منتخبات</span><span class=f onclick="setF('عرب',this)">عرب 23</span></div>
-<div id=s style="text-align:center;color:#000;padding:9px;background:linear-gradient(90deg,gold,#fff,gold);margin:6px;border-radius:10px;font-size:12px;font-weight:900">DIAMOND V58.1 يحمل 222 بطولة - LIGHT...</div>
+<div style="padding:7px;white-space:nowrap;overflow:auto;text-align:center"><span class="f active" onclick="setF('all',this)">الكل 222 💎</span><span class=f onclick="setF('champ',this)">ابطال</span><span class=f onclick="setF('منتخبات',this)">منتخبات</span><span class=f onclick="setF('عرب',this)">عرب 23</span></div>
+<div id=s style="text-align:center;color:#000;padding:9px;background:linear-gradient(90deg,gold,#fff,gold);margin:6px;border-radius:10px;font-size:12px;font-weight:900">DIAMOND V58.2 يحمل 222 بطولة...</div>
 <div class=sec style="color:#0af">ابطال - 10</div><div class=grid id=gC></div>
 <div class=sec style="color:gold">منتخبات - 12</div><div class=grid id=gN></div>
-<div class=sec style="color:#0f0">اندية - 200 دولة - من فلسطين لسوريا - DIAMOND</div><div class=grid id=g></div>
+<div class=sec style="color:#0f0">اندية - 200 دولة - DIAMOND</div><div class=grid id=g></div>
 <div id=m></div>
 <script>
 var CHAMP=["ucl|ابطال اوروبا","uel|الدوري الاوروبي","afc_cl|ابطال اسيا","afc2|ابطال اسيا 2","caf_cl|ابطال افريقيا","caf_conf|الكونفدرالية","arab_cl|ابطال العرب","gulf_cl|ابطال الخليج","club_world|كأس العالم اندية","libertadores|ليبرتادوريس"];
@@ -40,7 +37,7 @@ NAT.forEach(c=>{var p=c.split('|');gn.innerHTML+='<div class=box id="b-'+p[0]+'"
 ALL.forEach(c=>{var p=c.split('|');g.innerHTML+='<div class=box id="b-'+p[0]+'"><b>'+p[1]+'</b><br><small id="s-'+p[0]+'">...</small></div>';});
 var all=[],loaded=0,total=CHAMP.length+NAT.length+ALL.length;
 function ist(d){try{return new Date(d).toLocaleString('tr-TR',{timeZone:'Europe/Istanbul',hour:'2-digit',minute:'2-digit'})}catch(e){return d}}
-function countdown(ds){try{var diff=new Date(ds)-new Date(); if(diff<=0) return 'LIVE NOW!'; var h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000); if(h>24) return 'بعد '+(Math.floor(h/24))+' يوم'; return 'بعد '+h+' س '+m+' د';}catch(e){return 'قريبا';}}
+function countdown(ds){try{var diff=new Date(ds)-new Date(); if(diff<=0) return 'LIVE NOW!'; var h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000); if(h>24) return 'بعد '+Math.floor(h/24)+' يوم'; return 'بعد '+h+' س '+m+' د';}catch(e){return 'قريبا';}}
 function setF(f,el){document.querySelectorAll('.f').forEach(x=>x.classList.remove('active'));el.classList.add('active');doFilter(f);}
 function doFilter(force){
  var q=document.getElementById('q').value.toLowerCase();
@@ -52,7 +49,7 @@ function doFilter(force){
  document.getElementById('m').innerHTML=filtered.slice(0,600).map(m=>{
   var pr1=55+Math.floor(Math.random()*25),pr2=100-pr1, isNat=m.type=='nat', isChamp=m.type=='champ';
   var yt='https://www.youtube.com/results?search_query='+encodeURIComponent(m.home+' vs '+m.away+' live');
-  return '<div class="card '+(isNat?'nat':isChamp?'champ':'')+'"><b>'+(isChamp?'🏆 ':isNat?'🌍 ':'⚽ ')+m.home+' vs '+m.away+'</b><br><span class=count>⏰ '+countdown(m.date)+' | '+ist(m.date)+'</span><br><small style="color:gold">🏟️ '+m.league+'</small><div class=bar><div style="width:'+pr1+'%;background:linear-gradient(90deg,gold,#fff)"></div><div style="width:'+pr2+'%;background:#333"></div></div><small>🧠 AI: <b style="color:gold">'+pr1+'% '+m.home+'</b> | '+pr2+'% '+m.away+'</small><br><a href="'+yt+'" target="_blank" class="btn btn-yt">▶️ يوتيوب LIVE</a><button class="btn btn-ai" onclick="alert('AI: '+m.home+' يفوز '+pr1+'%')">🤖 توقع AI</button></div>';
+  return '<div class="card '+(isNat?'nat':isChamp?'champ':'')+'"><b>'+(isChamp?'🏆 ':isNat?'🌍 ':'⚽ ')+m.home+' vs '+m.away+'</b><br><span class=count>⏰ '+countdown(m.date)+' | '+ist(m.date)+'</span><br><small style="color:gold">'+m.league+'</small><div class=bar><div style="width:'+pr1+'%;background:gold"></div><div style="width:'+pr2+'%;background:#333"></div></div><small>🧠 AI: <b style="color:gold">'+pr1+'% '+m.home+'</b></small><br><a href="'+yt+'" target="_blank" class="btn btn-yt">▶️ يوتيوب LIVE</a><button class="btn btn-ai" onclick="alert('AI: '+m.home+' يفوز '+pr1+'%')">🤖 توقع AI</button></div>';
  }).join('')||'<div style=text-align:center;padding:15px;color:gold">يحمل '+loaded+'/'+total+' - '+all.length+' مباراة</div>';
 }
 function loadOne(code,type){
@@ -73,19 +70,16 @@ setTimeout(auto,400);
 </script></body></html>
 """
 @app.route('/')
-def home():
-    return H
+def home(): return HTML
 @app.route('/api/<code>')
 def api(code):
-    from flask import request
-    t=request.args.get('t','club')
-    import datetime, random
-    b=datetime.datetime.now()
-    d=(b+datetime.timedelta(days=random.randint(0,3),hours=random.randint(17,23))).isoformat()
-    d2=(b+datetime.timedelta(days=random.randint(1,4),hours=19)).isoformat()
-    if t=='champ':
-        m={"ucl":[("Real Madrid","Man City"),("Barcelona","PSG"),("Bayern","Arsenal"),("Inter","Liverpool")],"afc_cl":[("Al Hilal","Al Ain"),("Al Nassr","Persepolis")],"caf_cl":[("Al Ahly","Wydad")],"arab_cl":[("Al Hilal","Al Ittihad")],"club_world":[("Man City","Flamengo")],"libertadores":[("Flamengo","River Plate")]}
-        tm=m.get(code,[(code+" A",code+" B")])
-        return jsonify({"up":[{"home":h,"away":a,"league":code+" - ابطال","date":d} for h,a in tm]})
-    if t=='nat':
-        m={"world_cup":[("البرازيل","الارجنتين"),("فرنسا","اسبانيا")],"asia_cup":[("السعودية","اليابان"),("سوريا","العراق")],"africa_cup":[("المغرب","السنغال"),("مصر","
+ from flask import request
+ t=request.args.get('t','club')
+ import datetime, random
+ b=datetime.datetime.now()
+ d=(b+datetime.timedelta(days=random.randint(0,3),hours=random.randint(17,23))).isoformat()
+ d2=(b+datetime.timedelta(days=random.randint(1,4),hours=19)).isoformat()
+ if t=='champ': return jsonify({"up":[{"home":code+" A","away":code+" B","league":code+" - ابطال","date":d}]})
+ if t=='nat': return jsonify({"up":[{"home":code+" A","away":code+" B","league":code+" - منتخبات","date":d2}]})
+ return jsonify({"up":[{"home":code+" الملكي","away":code+" الوطني","league":"الدوري - "+code,"date":d}]})
+if __name__=='__main__': app.run(host='0.0.0.0',port=10000)
