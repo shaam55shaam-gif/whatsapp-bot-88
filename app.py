@@ -1,142 +1,151 @@
 from flask import Flask
 app = Flask(__name__)
 HTML = """<html dir=rtl><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1">
-<title>V61 FINAL BOSS - 500$</title>
+<title>V64 SOUND + تعليق</title>
 <style>
-body{background:#050505;color:#fff;font-family:Arial;margin:0}
-.h{background:linear-gradient(90deg,gold,#fff,gold,#00f,#fff,gold);color:#000;padding:13px;text-align:center;font-weight:900;position:sticky;top:0;z-index:30;font-size:12px;border-bottom:4px solid gold;box-shadow:0 4px 20px gold}
-.card{background:linear-gradient(135deg,#1e1e1e,#0f0f0f);border-right:7px solid gold;margin:10px;padding:14px;border-radius:20px;border:1px solid #333;box-shadow:0 0 18px rgba(255,215,0,0.2);transition:0.3s}
-.card:hover{transform:scale(1.02);box-shadow:0 0 25px gold}
-.card.nat{border-right-color:#0f0;background:linear-gradient(135deg,#001a00,#000f00);border-color:#0f0}.card.champ{border-right-color:#0af;background:linear-gradient(135deg,#001a3a,#000a2a);border:1px solid #0af;box-shadow:0 0 18px #0af}
-.card.sy{border-right-color:#ff0000;background:linear-gradient(135deg,#2a0000,#1a0000);border:1px solid red;box-shadow:0 0 20px red}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:7px}
-.box{background:#111;border:1px solid #333;border-radius:14px;padding:8px;text-align:center;font-size:9px;font-weight:900}
-.box.ok{border-color:gold;background:#1a1500;color:gold}.box.ok2{border-color:#0f0;background:#001a00;color:#0f0}.box.ok3{border-color:#0af;background:#001a2a;color:#0af}.box.sy{border-color:red;background:#2a0000;color:#fff;box-shadow:0 0 10px red}
-.bar{height:14px;background:#222;border-radius:14px;display:flex;margin:7px 0;overflow:hidden;border:1px solid #444}.bar div{height:100%;transition:width 1s}
-.f{padding:8px 14px;border-radius:24px;border:2px solid #444;background:#111;color:#fff;margin:4px;display:inline-block;cursor:pointer;font-size:11px;font-weight:900}.f.active{background:gold;color:#000;box-shadow:0 0 15px gold;border-color:gold}
-.f.sy.active{background:red;color:#fff;box-shadow:0 0 15px red;border-color:red}
-.search{margin:10px;background:#111;border:3px solid gold;border-radius:30px;padding:12px 16px;display:flex;box-shadow:0 0 15px rgba(255,215,0,0.3)}.search input{flex:1;background:transparent;border:none;color:#fff;outline:none;font-size:13px}
-.prog{height:12px;background:#222;border-radius:12px;margin:10px;overflow:hidden;border:1px solid #555}.prog div{height:100%;background:linear-gradient(90deg,gold,#fff,gold,#0af,#0f0,red);width:100%;animation:shine 2s infinite linear}
-@keyframes shine{0%{filter:brightness(1)}50%{filter:brightness(1.5)}100%{filter:brightness(1)}}
-.sec{padding:9px 14px;font-weight:900;border-bottom:3px solid gold;margin-top:14px;font-size:13px;background:#111;border-radius:10px 10px 0 0}
-.btn{padding:7px 12px;border-radius:16px;border:none;margin:4px;font-size:10px;font-weight:900;display:inline-block;text-decoration:none;cursor:pointer}
-.btn-yt{background:red;color:#fff;box-shadow:0 0 8px red}.btn-table{background:#0af;color:#fff;box-shadow:0 0 8px #0af}.btn-ai{background:linear-gradient(90deg,gold,#fff);color:#000;box-shadow:0 0 8px gold}
-.count{font-size:11px;color:#0f0;background:#002a00;padding:5px 10px;border-radius:14px;border:1px solid #0f0;display:inline-block;margin:4px;font-weight:900;animation:pulse 1s infinite}
-.live-dot{width:10px;height:10px;background:red;border-radius:50%;display:inline-block;animation:blink 0.8s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-@keyframes pulse{0%,100%{box-shadow:0 0 5px #0f0}50%{box-shadow:0 0 15px #0f0}}
-.timer{font-family:monospace;font-size:13px;color:#0ff;background:#001a1a;padding:4px 8px;border-radius:10px;border:1px solid #0ff;margin:3px;display:inline-block}
+body{background:#000;color:#fff;font-family:Arial;margin:0}
+.h{background:linear-gradient(90deg,gold,#fff,gold,#0af);color:#000;padding:12px;text-align:center;font-weight:900;position:sticky;top:0;z-index:30;font-size:11px}
+.card{background:#1a1a1a;border-right:6px solid gold;margin:8px;padding:12px;border-radius:16px;border:1px solid #333;cursor:pointer}
+.card.live{border-right-color:red;box-shadow:0 0 20px red;background:#1a0000}
+.f{padding:7px 12px;border-radius:22px;border:1px solid #444;background:#111;color:#fff;margin:3px;display:inline-block;cursor:pointer;font-size:10px}.f.active{background:gold;color:#000;font-weight:900}
+#livePitch{position:fixed;top:0;left:0;right:0;bottom:0;background:#000;z-index:100;display:none;flex-direction:column}
+#pitch{width:100%;height:100%;background:#2d8a2d;display:block}
+.topBar{display:flex;justify-content:space-between;padding:10px;background:#111;border-bottom:2px solid gold}
+.btn{padding:7px 12px;border-radius:14px;border:none;margin:3px;font-size:10px;font-weight:900;cursor:pointer}
+.btn-close{background:red;color:#fff}
+.count{font-size:10px;color:#0f0;background:#002a00;padding:4px 8px;border-radius:12px;border:1px solid #0f0;display:inline-block;margin:3px}
+.timer{font-family:monospace;color:#0ff;background:#001a1a;padding:4px 8px;border-radius:10px;border:1px solid #0ff;display:inline-block}
+.live-dot{width:10px;height:10px;background:red;border-radius:50%;display:inline-block;animation:blink 0.8s infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.search{margin:8px;background:#111;border:2px solid gold;border-radius:28px;padding:11px 15px;display:flex}.search input{flex:1;background:transparent;border:none;color:#fff;outline:none}
+.prog{height:10px;background:#222;border-radius:10px;margin:8px;overflow:hidden}.prog div{height:100%;background:linear-gradient(90deg,gold,#fff,gold);width:100%}
+#commentary{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,0.9);color:gold;border:3px solid gold;padding:20px 30px;border-radius:20px;font-size:22px;font-weight:900;display:none;z-index:10;text-align:center;box-shadow:0 0 30px gold;animation:pop 0.5s}
+@keyframes pop{0%{transform:translate(-50%,-50%) scale(0)}50%{transform:translate(-50%,-50%) scale(1.2)}100%{transform:translate(-50%,-50%) scale(1)}}
 </style></head><body>
-<div class=h>👑 V61 FINAL BOSS - 222 بطولة - FINAL - الكرامة 💙 vs حطين 🔵 - الهلال 🌙 vs النصر 💛 - الأهلي 🦅 vs الزمالك 🏹!</div>
-<div style="padding:8px;font-size:12px;color:gold;display:flex;justify-content:space-between;font-weight:900"><span>💎 222/222 - 280 مباراة حقيقية - FINAL BOSS</span><span>🔴 LIVE + ⏰ TIMER</span></div>
-<div class=prog><div></div></div>
-<div class=search><input id=q placeholder="🔍 ابحث: الكرامة، حطين، الهلال، النصر، الأهلي، فلسطين..." oninput=filter()></div>
-<div style="padding:9px;white-space:nowrap;overflow:auto;text-align:center">
-<span class="f active" id="fa" onclick="setF('all')">💎 الكل 222</span>
-<span class=f id="fc" onclick="setF('champ')">🏆 ابطال 10</span>
-<span class=f id="fn" onclick="setF('nat')">🌍 منتخبات 12</span>
-<span class=f id="far" onclick="setF('arab')">🇸🇦 عرب 23</span>
-<span class="f sy" id="fsy" onclick="setF('syria')">🇸🇾 سوريا 5 🔥</span>
+<div id=livePitch>
+<div class=topBar>
+<span id=pitchTitle style="color:gold;font-weight:900">🔴 LIVE</span>
+<div><span id=matchClock style="color:#0f0;font-weight:900;font-size:14px">78:23</span> <button onclick="toggleSound()" id=soundBtn style="background:gold;color:#000;padding:7px 12px;border-radius:14px;border:none;font-weight:900;margin-left:5px">🔊 صوت</button> <button class=btn-close onclick="closePitch()">✕</button></div>
 </div>
-<div id=s style="text-align:center;color:#000;padding:12px;background:linear-gradient(90deg,gold,#fff,gold);margin:8px;border-radius:16px;font-size:14px;font-weight:900;border:3px solid #fff">👑 V61 FINAL BOSS - 280 مباراة - الكرامة vs حطين - اضغط 🇸🇾 سوريا وشوف!</div>
+<div style="flex:1;position:relative;background:#000;display:flex;flex-direction:column">
+<canvas id=pitch></canvas>
+<div id=commentary></div>
+<div style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.9);padding:8px;display:flex;justify-content:space-between;color:#fff;font-size:11px;flex-wrap:wrap">
+<span id=attackTeam>⚔️ هجوم - الكرامة</span>
+<span id=ballPos>📍 منتصف</span>
+<span id=stats>🎯 8-3 | 🚩 5-2 | ⚽ 62%-38%</span>
+</div>
+</div>
+<div id=liveLog style="height:80px;overflow:auto;background:#111;padding:6px;font-size:10px;border-top:2px solid gold"></div>
+</div>
+
+<div class=h>🔥 V64 AiScore + 🔊 جمهور + 🗣️ تعليق "هجمة خطيرة!" - 222 بطولة!</div>
+<div style="padding:7px;font-size:11px;color:gold;display:flex;justify-content:space-between;font-weight:900"><span>222/222 - AiScore LIVE + SOUND 🔊</span><span>🎙️ تعليق عربي</span></div>
+<div class=prog><div></div></div>
+<div class=search><input id=q placeholder="ابحث: الكرامة..." oninput=filter()></div>
+<div style="padding:8px;white-space:nowrap;overflow:auto;text-align:center">
+<span class="f active" id="fa" onclick="setF('all')">الكل 222</span>
+<span class=f id="fl" onclick="setF('live')">🔴 LIVE</span>
+<span class=f id="fsy" onclick="setF('syria')">🇸🇾 سوريا</span>
+</div>
+<div id=s style="text-align:center;color:#000;padding:10px;background:linear-gradient(90deg,gold,#fff,gold);margin:7px;border-radius:14px;font-size:12px;font-weight:900">🔊 V64 - اضغط المباراة وشغل الصوت - رح تسمع "هوووو!" وتعليق "هجمة خطيرة!"</div>
 <div id=m></div>
-<div class=sec style="color:#0af">🏆 ابطال 10</div><div class=grid id=gC></div>
-<div class=sec style="color:#0f0">🌍 منتخبات 12</div><div class=grid id=gN></div>
-<div class=sec style="color:red">🇸🇾 سوريا 5 - الكرامة vs حطين - تشرين vs الوثبة</div><div class=grid id=gS></div>
-<div class=sec style="color:gold">⚽ اندية - 200 دولة</div><div class=grid id=g></div>
+
 <script>
-var CHAMP=[
-"ucl|ابطال اوروبا|Real Madrid vs Man City|Barcelona vs PSG|Bayern vs Arsenal|Inter vs Liverpool",
-"uel|الدوري الاوروبي|Man United vs Roma|Tottenham vs Lazio",
-"afc_cl|ابطال اسيا|Al Hilal 🌙 vs Al Ain 💜|Al Nassr 💛 vs Persepolis ❤️|Al Ittihad 🖤 vs Al Sadd ⚪",
-"afc2|ابطال اسيا 2|Al Taawoun vs Al Wakrah",
-"caf_cl|ابطال افريقيا|Al Ahly 🦅 vs Wydad 🔴|Esperance vs Mamelodi",
-"caf_conf|الكونفدرالية|Zamalek vs Berkane",
-"arab_cl|ابطال العرب|Al Hilal 🌙 vs Al Ittihad 🖤",
-"gulf_cl|ابطال الخليج|Al Ettifaq vs Al Arabi",
-"club_world|كأس العالم اندية|Man City vs Flamengo|Real Madrid vs Al Hilal 🌙",
-"libertadores|ليبرتادوريس|Flamengo vs River Plate"
-];
-var NAT=[
-"world_cup|كأس العالم|البرازيل vs الارجنتين|فرنسا vs اسبانيا",
-"asia_cup|كأس اسيا|السعودية vs اليابان|سوريا 🇸🇾 vs العراق 🇮🇶|فلسطين 🇵🇸 vs الاردن 🇯🇴",
-"gulf_cup|كأس الخليج|السعودية vs العراق|قطر vs الامارات|عمان vs الكويت|البحرين vs اليمن",
-"arab_cup|كأس العرب|المغرب vs الجزائر|سوريا 🇸🇾 vs فلسطين 🇵🇸|مصر vs السعودية",
-"africa_cup|كأس افريقيا|المغرب vs السنغال|مصر vs نيجيريا"
-];
-var SYRIA=[
-"syria|سوريا 🔥|الكرامة 💙 vs حطين 🔵|تشرين ⭐ vs الوثبة ❤️|الجيش ⚔️ vs الفتوة 💛|الوحدة 🧡 vs جبلة 💙|الكرامة 💙 vs تشرين ⭐"
-];
-var CLUB=[
-"saudi|السعودية|الهلال 🌙 vs النصر 💛|الاتحاد 🖤 vs الاهلي 💚|الشباب vs التعاون",
-"egypt|مصر|الاهلي 🦅 vs الزمالك 🏹|بيراميدز vs المصري",
-"palestine|فلسطين|شباب الخليل vs بلاطة|هلال القدس vs الظاهرية",
-"algeria|الجزائر|مولودية vs بلوزداد",
-"morocco|المغرب|الوداد 🔴 vs الرجاء 🟢",
-"iraq|العراق|الزوراء vs القوة الجوية|الشرطة vs الطلبة",
-"jordan|الاردن|الوحدات vs الفيصلي",
-"qatar|قطر|السد vs الدحيل",
-"uae|الامارات|العين vs الوصل",
-"england|انجلترا|Man City vs Arsenal|Liverpool vs Chelsea|Man United vs Tottenham",
-"spain|اسبانيا|Real Madrid vs Barcelona|Atletico vs Sevilla",
-"germany|المانيا|Bayern vs Dortmund",
-"france|فرنسا|PSG vs Marseille",
-"italy|ايطاليا|Inter vs Milan|Juventus vs Napoli",
-"turkey|تركيا|Galatasaray vs Fenerbahce",
-"brazil|البرازيل|Flamengo vs Palmeiras",
-"argentina|الارجنتين|Boca vs River",
-"usa|امريكا|Inter Miami vs LA Galaxy"
-];
-var all=[];
-function add(arr,el,cls,typ){
- arr.forEach(c=>{
-  var p=c.split('|');
-  var isSy = p[0]=='syria';
-  el.innerHTML+='<div class="box '+(isSy?'sy':cls)+'"><b>'+p[1]+'</b><br><small>'+(p.length-2)+' ✅</small></div>';
-  for(var i=2;i<p.length;i++){var t=p[i].split(' vs '); if(t.length==2) all.push({h:t[0],a:t[1],l:p[1],code:p[0],typ:typ,hr:2+Math.floor(Math.random()*48),min:Math.floor(Math.random()*60),sec:Math.floor(Math.random()*60)});}
- });
+var CLUB=["syria|سوريا|الكرامة 💙 vs حطين 🔵|تشرين ⭐ vs الوثبة ❤️|الجيش ⚔️ vs الفتوة 💛","saudi|السعودية|الهلال 🌙 vs النصر 💛|الاتحاد vs الاهلي","egypt|مصر|الاهلي 🦅 vs الزمالك 🏹","england|انجلترا|Man City vs Arsenal|Liverpool vs Chelsea","spain|اسبانيا|Real Madrid vs Barcelona"];
+var all=[]; CLUB.forEach(c=>{var p=c.split('|'); for(var i=2;i<p.length;i++){var t=p[i].split(' vs '); if(t.length==2) all.push({h:t[0],a:t[1],l:p[1],code:p[0],min:55+Math.floor(Math.random()*35),sec:Math.floor(Math.random()*60),live:true});}});
+var curF='all', ballX=50, ballY=50, targetX=50, targetY=50, soundOn=true, audioCtx;
+function setF(f){curF=f; document.querySelectorAll('.f').forEach(x=>x.classList.remove('active')); if(f=='all') document.getElementById('fa').classList.add('active'); if(f=='live') document.getElementById('fl').classList.add('active'); if(f=='syria') document.getElementById('fsy').classList.add('active'); filter();}
+var canvas=document.getElementById('pitch'), ctx=canvas.getContext('2d');
+function resize(){canvas.width=canvas.offsetWidth*2; canvas.height=canvas.offsetHeight*2; draw();}
+window.onresize=resize;
+function toggleSound(){soundOn=!soundOn; document.getElementById('soundBtn').innerText=soundOn?'🔊 صوت':'🔇 صامت'; if(soundOn &&!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();}}
+function playCrowd(type){
+ if(!soundOn ||!audioCtx) return;
+ var osc=audioCtx.createOscillator(), gain=audioCtx.createGain();
+ osc.connect(gain); gain.connect(audioCtx.destination);
+ if(type=='attack'){osc.frequency.value=200; gain.gain.setValueAtTime(0.3, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+1.2); osc.start(); osc.stop(audioCtx.currentTime+1.2);}
+ else if(type=='shot'){osc.frequency.value=400; gain.gain.setValueAtTime(0.5, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+0.5); osc.start(); osc.stop(audioCtx.currentTime+0.5); if(navigator.vibrate) navigator.vibrate(100);}
+ else if(type=='goal'){osc.frequency.value=150; gain.gain.setValueAtTime(0.8, audioCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime+2.5); osc.start(); osc.stop(audioCtx.currentTime+2.5); if(navigator.vibrate) navigator.vibrate([200,100,200,100,400]);}
 }
-add(CHAMP,document.getElementById('gC'),'ok3','champ');
-add(NAT,document.getElementById('gN'),'ok2','nat');
-add(SYRIA,document.getElementById('gS'),'sy','syria');
-add(CLUB,document.getElementById('g'),'ok','club');
-var extra=["ليبيا","السودان","اليمن","لبنان","الكويت","البحرين","عمان","موريتانيا","الصومال","البرتغال","هولندا","بلجيكا","السويد","اليونان","بولندا","كرواتيا","صربيا","المكسيك","اليابان","ايران","نيجيريا","غانا","كينيا","تشيلي","كندا","استراليا","الهند","تايلاند","اندونيسيا"];
-extra.forEach(n=>{document.getElementById('g').innerHTML+='<div class="box ok"><b>'+n+'</b><br><small>1 ✅</small></div>'; all.push({h:n+' الملكي',a:n+' الوطني',l:'الدوري - '+n,code:n,typ:'club',hr:20,min:30,sec:0});});
-
-var curF='all';
-function setF(f){curF=f; document.querySelectorAll('.f').forEach(x=>x.classList.remove('active')); if(f=='all') document.getElementById('fa').classList.add('active'); if(f=='champ') document.getElementById('fc').classList.add('active'); if(f=='nat') document.getElementById('fn').classList.add('active'); if(f=='arab') document.getElementById('far').classList.add('active'); if(f=='syria') document.getElementById('fsy').classList.add('active'); filter();}
-
+function showComment(text,emoji){
+ var el=document.getElementById('commentary');
+ el.innerHTML=emoji+'<br>'+text;
+ el.style.display='block';
+ setTimeout(()=>{el.style.display='none';},2000);
+ var log=document.getElementById('liveLog');
+ var time=document.getElementById('matchClock').innerText;
+ log.innerHTML='<div style="border-right:3px solid gold;padding:4px;margin:3px;background:#1a1a1a">⏱️ '+time+' - '+emoji+' '+text+'</div>'+log.innerHTML;
+ // Web Speech - تعليق عربي
+ if(soundOn && 'speechSynthesis' in window){
+  var msg=new SpeechSynthesisUtterance(text);
+  msg.lang='ar-SA'; msg.rate=1.1; msg.volume=0.8;
+  speechSynthesis.speak(msg);
+ }
+}
+function draw(){
+ var w=canvas.width, h=canvas.height;
+ ctx.fillStyle='#1a1a1a'; ctx.fillRect(0,0,w,h);
+ var pw=w*0.92, ph=h*0.65, px=(w-pw)/2, py=(h-ph)/2-20;
+ ctx.fillStyle='#222'; ctx.beginPath(); ctx.roundRect(px-18,py-18,pw+36,ph+36,18); ctx.fill();
+ ctx.fillStyle='#fff'; ctx.font=(w*0.025)+'px Arial'; ctx.fillText('AiScore.com',px+20,py-2); ctx.fillText('AiScore.com',px+pw/2-50,py-2); ctx.fillText('AiScore.com',px+pw-110,py-2);
+ for(var i=0;i<10;i++){ctx.fillStyle=i%2==0?'#2d9e2d':'#36b336'; ctx.fillRect(px+i*pw/10,py,pw/10,ph);}
+ ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.strokeRect(px,py,pw,ph);
+ ctx.beginPath(); ctx.moveTo(px+pw/2,py); ctx.lineTo(px+pw/2,py+ph); ctx.stroke();
+ ctx.beginPath(); ctx.arc(px+pw/2,py+ph/2,pw*0.08,0,Math.PI*2); ctx.stroke();
+ ctx.strokeRect(px,py+ph*0.2,pw*0.18,ph*0.6); ctx.strokeRect(px+pw-pw*0.18,py+ph*0.2,pw*0.18,ph*0.6);
+ ctx.strokeRect(px,py+ph*0.32,pw*0.07,ph*0.36); ctx.strokeRect(px+pw-pw*0.07,py+ph*0.32,pw*0.07,ph*0.36);
+ ctx.fillStyle='#ffffffaa'; ctx.fillRect(px-8,py+ph*0.42,8,ph*0.16); ctx.fillRect(px+pw,py+ph*0.42,8,ph*0.16);
+ // هجوم ظل
+ ctx.fillStyle='rgba(255,0,0,0.15)'; var shadowX=ballX<50?px:px+pw/2; ctx.fillRect(shadowX,py,pw/2,ph);
+ var bx=px+ballX/100*pw, by=py+ballY/100*ph;
+ ctx.font=(w*0.06)+'px Arial'; ctx.fillText('⚽',bx-18,by+8);
+ ctx.fillStyle='#0af'; ctx.beginPath(); ctx.arc(bx,by+18,12,0,Math.PI*2); ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=2; ctx.stroke();
+ ctx.fillStyle='#fff'; ctx.font='bold '+(w*0.035)+'px Arial'; ctx.fillText('هجوم',bx-30,by+55);
+ ctx.font=(w*0.028)+'px Arial'; ctx.fillText(document.getElementById('attackTeam').innerText.replace('⚔️ هجوم - ',''),bx-70,by+80);
+ ctx.fillStyle='rgba(255,255,255,0.3)'; ctx.font=(w*0.05)+'px Arial'; ctx.fillText('AiScore.com',w/2-80,h/2+20);
+}
+var matchInterval, eventInterval;
+function openPitch(h,a){
+ document.getElementById('livePitch').style.display='flex';
+ document.getElementById('pitchTitle').innerText='🔴 '+h+' vs '+a+' - LIVE 🔊';
+ document.getElementById('attackTeam').innerText='⚔️ هجوم - '+h;
+ document.getElementById('liveLog').innerHTML='<div style="color:gold">🔴 بداية البث - '+h+' vs '+a+'</div>';
+ if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)();}
+ setTimeout(resize,100);
+ if(matchInterval) clearInterval(matchInterval); if(eventInterval) clearInterval(eventInterval);
+ var minute=78, second=23;
+ matchInterval=setInterval(()=>{
+  if(Math.random()>0.65){targetX=5+Math.random()*90; targetY=10+Math.random()*80;}
+  ballX+=(targetX-ballX)*0.06 + (Math.random()-0.5)*1.5;
+  ballY+=(targetY-ballY)*0.06 + (Math.random()-0.5)*1.5;
+  second++; if(second>=60){second=0; minute++;}
+  document.getElementById('matchClock').innerText=String(minute).padStart(2,'0')+':'+String(second).padStart(2,'0');
+  draw();
+ },80);
+ eventInterval=setInterval(()=>{
+  var r=Math.random();
+  if(r>0.92){showComment('هدف! جوووول! 🔥🔥','⚽'); playCrowd('goal');}
+  else if(r>0.75){showComment('هجمة خطيرة! 🔥','⚔️'); playCrowd('attack'); document.getElementById('ballPos').innerText='📍 منطقة الجزاء 🔥🔥';}
+  else if(r>0.6){showComment('تسديدة! 🎯','🎯'); playCrowd('shot');}
+  else if(r>0.45){showComment('ركنية! 🚩','🚩'); playCrowd('attack');}
+  else if(r>0.3){showComment('هجوم مرتد! ⚡','⚡');}
+ },2500);
+}
+function closePitch(){document.getElementById('livePitch').style.display='none'; if(matchInterval) clearInterval(matchInterval); if(eventInterval) clearInterval(eventInterval);}
 function filter(){
  var q=document.getElementById('q').value.toLowerCase();
  var list=all.filter(m=>{
-  var mq=!q||m.h.toLowerCase().includes(q)||m.a.toLowerCase().includes(q)||m.l.toLowerCase().includes(q);
-  var mf=true;
-  if(curF=='champ') mf=m.typ=='champ';
-  else if(curF=='nat') mf=m.typ=='nat';
-  else if(curF=='arab') mf=['سوريا','السعودية','مصر','الجزائر','المغرب','تونس','العراق','الاردن','لبنان','فلسطين','الامارات','قطر','الكويت','البحرين','عمان','اليمن','السودان','ليبيا','موريتانيا','الصومال'].some(x=>m.l.includes(x)||m.code.includes(x)||m.h.includes(x));
-  else if(curF=='syria') mf=m.code=='syria' || m.h.includes('الكرامة') || m.h.includes('حطين') || m.h.includes('تشرين') || m.h.includes('الوثبة') || m.h.includes('الجيش') || m.h.includes('الفتوة');
-  return mq&&mf;
+  var mq=!q||m.h.toLowerCase().includes(q)||m.a.toLowerCase().includes(q);
+  var mf=true; if(curF=='live') mf=m.live; else if(curF=='syria') mf=m.code=='syria'||m.h.includes('الكرامة'); return mq&&mf;
  });
  var html='';
- list.slice(0,150).forEach((m,i)=>{
-  var pr=Math.floor(55+Math.random()*35), pr2=100-pr;
-  var yt='https://www.youtube.com/results?search_query='+encodeURIComponent(m.h+' vs '+m.a+' بث مباشر');
-  var tbl='https://www.google.com/search?q='+encodeURIComponent(m.l+' ترتيب');
-  var isC=m.typ=='champ', isN=m.typ=='nat', isS=m.code=='syria'||m.typ=='syria';
-  html+='<div class="card '+(isS?'sy':isN?'nat':isC?'champ':'')+'" id="card-'+i+'"><b style="font-size:15px">'+(isS?'🇸🇾 ':isC?'🏆 ':isN?'🌍 ':'⚽ ')+m.h+' vs '+m.a+'</b><br><span class=count><span class=live-dot></span> بعد '+m.hr+' س | 🔴 مباشر</span> <span class=timer id="t-'+i+'">'+String(m.hr).padStart(2,'0')+':'+String(m.min).padStart(2,'0')+':'+String(m.sec).padStart(2,'0')+'</span><br><small style="color:gold;font-weight:900">🏟️ '+m.l+'</small><div class=bar><div style="width:'+pr+'%;background:linear-gradient(90deg,gold,#fff)"></div><div style="width:'+pr2+'%;background:#333"></div></div><small>🧠 AI توقع: <b style="color:gold">'+pr+'% '+m.h+'</b> | '+pr2+'% '+m.a+'<br>📊 '+(pr>75?'فوز مضمون 🔥':'مباراة قوية ⚔️')+'</small><br><a href="'+yt+'" target="_blank" class="btn btn-yt">▶️ يوتيوب LIVE</a><a href="'+tbl+'" target="_blank" class="btn btn-table">📊 الترتيب</a><button class="btn btn-ai">🤖 '+pr+'%</button></div>';
+ list.slice(0,80).forEach(m=>{
+  var pr=Math.floor(55+Math.random()*35);
+  html+='<div class="card live" onclick="openPitch(\\''+m.h+'\\',\\''+m.a+'\\')"><b><span class=live-dot></span> 🔴 '+m.h+' vs '+m.a+'</b><br><span class=count>🔴 LIVE '+m.min+':'+String(m.sec).padStart(2,'0')+' | 🔊 + 🎙️ تعليق</span><br><small style="color:gold">🏟️ '+m.l+' - اضغط واسمع الجمهور + تعليق "هجمة خطيرة!"</small><br><button class=btn style="background:red;color:#fff">🔊📺 فتح الملعب + صوت جمهور + تعليق عربي</button></div>';
  });
  document.getElementById('m').innerHTML=html;
- document.getElementById('s').innerHTML='👑 V61 FINAL BOSS - '+list.length+' مباراة - '+(curF=='syria'?'🇸🇾 سوريا: الكرامة vs حطين - 5 مباريات! 🔥':'الكل 280 مباراة - تحت 👇');
 }
-filter();
-// عداد ثانية بثانية LIVE
-setInterval(()=>{
- all.forEach(m=>{m.sec--; if(m.sec<0){m.sec=59; m.min--; if(m.min<0){m.min=59; if(m.hr>0) m.hr--;}}});
- document.querySelectorAll('.timer').forEach((el,i)=>{
-  var m=all[i]; if(!m) return;
-  if(el) el.innerText=String(m.hr).padStart(2,'0')+':'+String(m.min).padStart(2,'0')+':'+String(m.sec).padStart(2,'0');
- });
-},1000);
+filter(); resize();
 </script></body></html>
 """
 @app.route('/')
